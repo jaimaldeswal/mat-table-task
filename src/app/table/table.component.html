@@ -1,0 +1,81 @@
+<div class="main-search">
+    <button class="price-filter menu" mat-button [matMenuTriggerFor]="aboveMenu">Configuration</button>
+    <mat-menu #aboveMenu="matMenu">
+        <div *ngFor="let item of uniqueConfiguration">
+
+            <label>
+                <input type="checkbox" name="item" value="{{item.value}}" [(ngModel)]="item.checked"
+                    (click)="configChange($event); $event.stopPropagation()" />
+                {{item.name}}
+            </label>
+
+            <!-- <mat-checkbox [(ngModel)]="item.checked">{{item.name}}</mat-checkbox> -->
+        </div>
+    </mat-menu>
+    <div class="price-filter">
+        <input type="number" class="mat-input-element" (keyup)="priceChange($event)" placeholder="Price Filter" #input>
+    </div>
+
+    <div class="price-filter">
+        <input class="mat-input-element" (keyup)="applySearch($event)" placeholder="Search" #input>
+    </div>
+</div>
+
+
+
+
+<mat-table mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort
+    class="mat-elevation-z8 listing-table">
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tower_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Tower
+            Name</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.building_towers.tower_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="propertyType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Property
+            Name</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.property_type.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="configurationName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Configuration
+            Name</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.configuration.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="min_price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Min
+            Price</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.min_price}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bedroom">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Bedroom</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.building_configuration.config.bedroom}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bathroom">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Bathroom</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.building_configuration.config.bathroom}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="halfBathroom">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Half
+            Bathroom</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.building_configuration.config.half_bathroom}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-row mat-header-row *matHeaderRowDef="displayedColumns;"></mat-row>
+    <mat-row mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+</mat-table>

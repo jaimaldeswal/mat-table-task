@@ -1,0 +1,18 @@
+.main-search {
+    display: flex;
+    padding: 16px;
+}
+
+.main-search .search {
+    height: 20px
+}
+
+.main-search .price-filter {
+    height: 20px;
+    margin-right: 26px;
+}
+
+
+.listing-table {
+    width: 100%;
+}
